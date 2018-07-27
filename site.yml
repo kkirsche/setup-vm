@@ -3,5 +3,6 @@
   hosts: all
   ignore_errors: no
   connection: local
+  become: yes
   roles:
     - vm

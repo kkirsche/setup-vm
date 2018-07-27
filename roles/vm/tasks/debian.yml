@@ -87,6 +87,7 @@
       - exuberant-ctags
       - numix-gtk-theme
       - rofi
+      - zsh
 
 - name: remove dependencies that are no longer required [Debian]
   when: ansible_os_family == "Debian"

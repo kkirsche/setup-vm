@@ -8,6 +8,8 @@
 
 - import_tasks: debian.yml 
 
+- import_tasks: arch.yml
+
 - name: download golang
   get_url:
     url: "https://dl.google.com/go/go{{ go_version }}.linux-amd64.tar.gz"
