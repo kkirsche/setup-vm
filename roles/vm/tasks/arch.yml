@@ -60,6 +60,32 @@
       - numix-gtk-theme
       - rofi
       - zsh
+      - xorg
+      - xorg-xinit
+      - wget
+      - base-devel
+      - zathura
+      - zathura-pdf-poppler
+      - vim
+      - geany
+      - gparted
+      - htop
+      - iotop
+      - tree
+      - ranger
+      - lynx
+      - ttf-dejavu
+      - ttf-inconsolata
+      - ttf-hack
+      - lxappearance
+      - arandr
+      - ntfs-3g
+      - udevil
+      - alsa-firmware
+      - alsa-utils
+      - alsa-plugins
+      - pulseaudio-alsa
+      - pulseaudio
 
 - name: update locate database [Archlinux]
   when: ansible_os_family == "Archlinux"
