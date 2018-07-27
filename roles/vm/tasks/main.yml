@@ -1,0 +1,105 @@
+---
+# tasks file for common
+- name: we're preparing to setup
+  debug:
+    var: ansible_os_family
+
+- import_tasks: kali.yml
+
+- import_tasks: debian.yml 
+
+- name: download golang
+  get_url:
+    url: "https://dl.google.com/go/go{{ go_version }}.linux-amd64.tar.gz"
+    dest: "/opt/golang-{{ go_version }}.tar.gz"
+
+- name: extract / install golang
+  unarchive:
+    src: "/opt/golang-{{ go_version }}.tar.gz"
+    remote_src: yes
+    dest: /usr/local
+
+- name: setup the PATH for golang
+  lineinfile:
+    path: /etc/profile
+    line: 'export PATH=$PATH:/usr/local/go/bin'
+
+- name: remove golang tarball
+  file:
+    path: "/opt/golang-{{ go_version }}.tar.gz"
+    state: absent
+
+- name: create i3 configuration directory
+  file:
+    path: "{{ ansible_env.HOME }}/.i3"
+    state: directory
+
+- name: copy the i3 configuration to the directory
+  copy:
+    src: i3/config
+    dest: "{{ ansible_env.HOME }}/.i3/config"
+
+- name: install vimrc file
+  copy:
+    src: vim/vimrc
+    dest: "{{ ansible_env.HOME }}/.vimrc"
+
+- name: create vim colors directory
+  file:
+    path: "{{ ansible_env.HOME }}/.vim/colors"
+    state: directory
+
+- name: install monokai pro vim colorscheme
+  copy:
+    src: vim/monokai_pro.vim
+    dest: "{{ ansible_env.HOME }}/.vim/colors/monokai_pro.vim"
+
+- name: install monokai vim colorscheme
+  copy:
+    src: vim/monokai.vim
+    dest: "{{ ansible_env.HOME }}/.vim/colors/monokai.vim"
+
+- name: install vundle
+  git:
+    repo: https://github.com/VundleVim/Vundle.vim.git
+    dest: "{{ ansible_env.HOME }}/.vim/bundle/Vundle.vim"
+
+- name: install Vundle plugins
+  command: /usr/bin/vim +PluginInstall +qall
+
+- name: download powerline fonts
+  git:
+    repo: https://github.com/ryanoasis/nerd-fonts.git
+    dest: "/opt/nerd-fonts"
+
+- name: install powerline fonts
+  script: "/opt/nerd-fonts/install.sh"
+
+- name: create base configuration directory
+  file:
+    path: "{{ ansible_env.HOME }}/.config"
+
+- name: create wallpaper configuration directory
+  file:
+    path: "{{ ansible_env.HOME }}/.config/images"
+    state: directory
+ 
+- name: install wallpaper
+  copy:
+    src: wallpaper.jpg
+    dest: "{{ ansible_env.HOME }}/.config/images/wallpaper.jpg"
+
+- name: install compton configuration
+  copy:
+    src: compton/compton.conf
+    dest: "{{ ansible_env.HOME }}/.config/compton.conf"
+
+- name: create terminator configuration directory
+  file:
+    path: "{{ ansible_env.HOME }}/.config/terminator"
+    state: directory
+
+- name: install terminator configuration
+  copy:
+    src: terminator/config
+    dest: "{{ ansible_env.HOME }}/.config/terminator/config"

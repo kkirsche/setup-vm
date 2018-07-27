@@ -1,0 +1,107 @@
+---
+# tasks file for common
+- name: upgrade all packages on the system [Kali Linux]
+  when: ansible_os_family == "Kali GNU/Linux"
+  apt:
+    name: "*"
+    state: latest 
+    update_cache: yes
+    force_apt_get: yes
+
+- name: add sublime text repository GPG key [Kali Linux]
+  when: ansible_os_family == "Kali GNU/Linux"
+  apt_key:
+    url: https://download.sublimetext.com/sublimehq-pub.gpg
+    state: present 
+
+- name: add sublime text apt repository [Kali Linux]
+  when: ansible_os_family == "Kali GNU/Linux"
+  apt_repository:
+    repo: deb https://download.sublimetext.com/ apt/stable/
+    state: present
+
+- name: update package cache [Kali Linux]
+  when: ansible_os_family == "Kali GNU/Linux"
+  apt:
+    update_cache: yes
+    force_apt_get: yes
+
+- name: install desired packages [Kali Linux]
+  when: ansible_os_family == "Kali GNU/Linux"
+  apt:
+    name: "{{ packages }}"
+    force_apt_get: yes
+  vars:
+    packages:
+      - kali-linux-all
+      - terminator
+      - gdb
+      - ipcalc
+      - sipcalc
+      - psmisc
+      - asciinema
+      - pv
+      - ncftp
+      - zip
+      - unzip
+      - network-manager-openvpn
+      - bridge-utils
+      - shellcheck
+      - cowsay
+      - sublime-text 
+      - open-vm-tools
+      - open-vm-tools-desktop
+      - fuse
+      - mlocate
+      - cmake
+      - python3
+      - python3-pip
+      - seclists
+      - dh-autoreconf
+      - fonts-hack-ttf
+      - rxvt-unicode
+      - feh
+      - compton
+      - vim
+      - i3
+      - i3-wm
+      - i3lock
+      - i3status
+      - dunst
+      - suckless-tools
+      - libxcb-keysyms1-dev
+      - libpango1.0-dev
+      - libxcb-util0-dev
+      - xcb
+      - libxcb1-dev
+      - libxcb-icccm4-dev
+      - libyajl-dev
+      - libev-dev
+      - libxcb-xkb-dev
+      - libxcb-cursor-dev
+      - libxkbcommon-dev
+      - libxcb-xinerama0-dev
+      - libxkbcommon-x11-dev
+      - libstartup-notification0-dev
+      - libxcb-randr0-dev
+      - libxcb-xrm0
+      - libxcb-xrm-dev
+      - exuberant-ctags
+      - numix-gtk-theme
+      - rofi
+
+- name: remove dependencies that are no longer required [Kali Linux]
+  when: ansible_os_family == "Kali GNU/Linux"
+  apt:
+    autoremove: yes
+    force_apt_get: yes
+
+- name: update searchsploit database [Kali Linux]
+  ignore_errors: yes
+  when: ansible_os_family == "Kali GNU/Linux"
+  command: /usr/bin/searchsploit -u
+
+- name: update locate database [Kali Linux]
+  when: ansible_os_family == "Kali GNU/Linux"
+  command: /usr/bin/updatedb
+ 

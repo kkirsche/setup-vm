@@ -1,0 +1,4 @@
+---
+# defaults file for common
+
+go_version: "1.10.3"

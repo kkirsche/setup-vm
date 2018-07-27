@@ -1,0 +1,7 @@
+---
+- name: setup a virtual machine for day to day usage
+  hosts: all
+  ignore_errors: no
+  connection: local
+  roles:
+    - vm
