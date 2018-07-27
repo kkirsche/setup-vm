@@ -11,22 +11,26 @@
 - import_tasks: arch.yml
 
 - name: download golang
+  become: yes
   get_url:
     url: "https://dl.google.com/go/go{{ go_version }}.linux-amd64.tar.gz"
     dest: "/opt/golang-{{ go_version }}.tar.gz"
 
 - name: extract / install golang
+  become: yes
   unarchive:
     src: "/opt/golang-{{ go_version }}.tar.gz"
     remote_src: yes
     dest: /usr/local
 
 - name: setup the PATH for golang
+  become: yes
   lineinfile:
     path: /etc/profile
     line: 'export PATH=$PATH:/usr/local/go/bin'
 
 - name: remove golang tarball
+  become: yes
   file:
     path: "/opt/golang-{{ go_version }}.tar.gz"
     state: absent
@@ -70,16 +74,19 @@
   command: /usr/bin/vim +PluginInstall +qall
 
 - name: download powerline fonts
+  become: yes
   git:
     repo: https://github.com/ryanoasis/nerd-fonts.git
     dest: "/opt/nerd-fonts"
 
 - name: install powerline fonts
+  become: yes
   script: "/opt/nerd-fonts/install.sh"
 
 - name: create base configuration directory
   file:
     path: "{{ ansible_env.HOME }}/.config"
+    state: directory
 
 - name: create wallpaper configuration directory
   file:
