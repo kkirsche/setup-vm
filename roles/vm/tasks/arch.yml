@@ -1,21 +1,24 @@
 ---
 # tasks file for common
-- name: upgrade all packages on the system [Archlinux]
+- name: upgrade all packages on the system [Arch Linux]
   when: ansible_os_family == "Archlinux"
   pacman:
     upgrade: yes
     update_cache: yes
 
-- name: add sublime text repository GPG key [Archlinux]
+- name: add sublime text repository GPG key [Arch Linux]
   when: ansible_os_family == "Archlinux"
-  command: 'curl -O https://download.sublimetext.com/sublimehq-pub.gpg && pacman-key --add sublimehq-pub.gpg && pacman-key --lsign-key 8A8F901A && rm sublimehq-pub.gpg && echo -e "\n[sublime-text]\nServer = https://download.sublimetext.com/arch/stable/x86_64" | tee -a /etc/pacman.conf' 
+  shell: 'curl -O https://download.sublimetext.com/sublimehq-pub.gpg && pacman-key --add sublimehq-pub.gpg && pacman-key --lsign-key 8A8F901A && rm sublimehq-pub.gpg && echo -e "\n[sublime-text]\nServer = https://download.sublimetext.com/arch/stable/x86_64" | tee -a /etc/pacman.conf' 
+  args:
+    executable: /bin/bash
+    warn: False
 
-- name: update package cache [Archlinux]
+- name: update package cache [Arch Linux]
   when: ansible_os_family == "Archlinux"
   pacman:
     update_cache: yes
 
-- name: install desired packages [Archlinux]
+- name: install desired packages [Arch Linux]
   when: ansible_os_family == "Archlinux"
   pacman:
     name: "{{ packages }}"
@@ -30,22 +33,18 @@
       - ncftp
       - zip
       - unzip
-      - network-manager-openvpn
       - shellcheck
       - cowsay
       - sublime-text 
       - open-vm-tools
-      - open-vm-tools-desktop
       - fuse
       - mlocate
       - cmake
-      - python3
-      - python3-pip
-      - dh-autoreconf
-      - ruby-full
+      - python
+      - python-pip
       - git
+      - ruby
       - compton
-      - fonts-hack-ttf
       - rxvt-unicode
       - feh
       - i3-gaps
@@ -53,10 +52,7 @@
       - i3lock
       - i3status
       - dunst
-      - suckless-tools
-      - gdb
-      - build-essentials
-      - exuberant-ctags
+      - ctags
       - numix-gtk-theme
       - rofi
       - zsh
@@ -87,7 +83,6 @@
       - pulseaudio-alsa
       - pulseaudio
 
-- name: update locate database [Archlinux]
+- name: update locate database [Arch Linux]
   when: ansible_os_family == "Archlinux"
   command: /usr/bin/updatedb
- 
