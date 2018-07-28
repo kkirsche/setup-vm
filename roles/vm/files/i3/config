@@ -19,6 +19,9 @@ bindsym $mod+Return exec i3-sensible-terminal
 # kill focused window
 bindsym $mod+Shift+A kill
 
+# exit i3
+bindsym $mod+Shift+E exec i3-exit
+
 # start rofi
 # bindsym $mod+d exec rofi -show drun
 # if rofi is old, like on ubuntu 16.04 we want to use dmenu_run
