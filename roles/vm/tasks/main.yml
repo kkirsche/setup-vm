@@ -89,11 +89,6 @@
     repo: https://github.com/stark/siji.git
     dest: "/opt/siji-fonts"
 
-- name: install siji fonts
-  script: "/opt/siji-fonts/install.sh"
-  args:
-    creates: "{{ ansible_env.HOME }}/.fonts/siji.pcf"
-
 - name: download Google material icons
   become: yes
   git:
@@ -129,3 +124,77 @@
   copy:
     src: terminator/config
     dest: "{{ ansible_env.HOME }}/.config/terminator/config"
+ 
+- name: install prezto zsh themeing
+  git:
+    repo: https://github.com/sorin-ionescu/prezto.git
+    dest: "{{ ansible_env.HOME }}/.zprezto"
+    recursive: yes 
+    force: yes
+
+- name: install prezto helper script
+  copy:
+    src: prezto/create_zsh_configuration.sh
+    dest: "{{ ansible_env.HOME }}/create_zsh_configuration.sh"
+
+- name: setup prezto via helper script
+  script: "{{ ansible_env.HOME }}/create_zsh_configuration.sh"
+
+- name: cleanup prezto helper script
+  file:
+    path: "{{ ansible_env.HOME }}/create_zsh_configuration.sh"
+    state: absent
+
+- name: set the default shell of the current user to ZSH 
+  become: yes
+  user:
+    name: "{{ ansible_env.USER }}"
+    shell: /bin/zsh
+    state: present
+    generate_ssh_key: yes
+    ssh_key_bits: 4096
+ 
+- name: set the prezto key-bindings
+  lineinfile:
+    path: "{{ ansible_env.HOME }}/.zpreztorc"
+    regexp: "zstyle ':prezto:module:editor' key-bindings 'emacs'"
+    line: "zstyle ':prezto:module:editor' key-bindings 'vi'"
+
+- name: set the prezto theme
+  lineinfile:
+    path: "{{ ansible_env.HOME }}/.zpreztorc"
+    regexp: "zstyle ':prezto:module:prompt' theme 'sorin'" 
+    line: "zstyle ':prezto:module:prompt' theme 'powerlevel9k'"
+
+- name: set prezto to launch a tmux session when starting up (local)
+  lineinfile:
+    path: "{{ ansible_env.HOME }}/.zpreztorc"
+    regexp: "# zstyle ':prezto:module:tmux:auto-start' local 'yes'"
+    line: "zstyle ':prezto:module:tmux:auto-start' local 'yes'"
+
+- name: set prezto to launch a tmux session when starting up (SSH)
+  lineinfile:
+    path: "{{ ansible_env.HOME }}/.zpreztorc"
+    regexp: "# zstyle ':prezto:module:tmux:auto-start' remote 'yes'"
+    line: "zstyle ':prezto:module:tmux:auto-start' remote 'yes'"
+
+- name: set the terminal for 256 color mode
+  lineinfile:
+    path: "{{ ansible_env.HOME }}/.zshrc"
+    line: 'export TERM="xterm-256color"'
+    insertbefore: '# Source Prezto\.'
+
+- name: set the terminal for NERD font availability
+  lineinfile:
+    path: "{{ ansible_env.HOME }}/.zshrc"
+    line: "export POWERLEVEL9K_MODE='nerdfont-complete'"
+
+- name: set the powerlevel left prompt
+  lineinfile:
+    path: "{{ ansible_env.HOME }}/.zshrc"
+    line: "export POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(dir vcs)"
+
+- name: set the powerlevel right prompt
+  lineinfile:
+    path: "{{ ansible_env.HOME }}/.zshrc"
+    line: "export POWERLEVEL9K_DISABLE_RPROMPT=true"

@@ -86,6 +86,7 @@
       - alsa-plugins
       - pulseaudio-alsa
       - pulseaudio
+      - tmux
 
 - name: update locate database [Arch Linux]
   become: yes

@@ -52,6 +52,7 @@
       - network-manager-openvpn
       - bridge-utils
       - shellcheck
+      - git
       - cowsay
       - sublime-text 
       - open-vm-tools
@@ -95,6 +96,7 @@
       - numix-gtk-theme
       - rofi
       - zsh
+      - tmux
 
 - name: remove dependencies that are no longer required [Kali Linux]
   when: ansible_os_family == "Kali GNU/Linux"

@@ -75,6 +75,8 @@
       - numix-gtk-theme
       - rofi
       - zsh
+      - vim
+      - tmux
 
 - name: remove dependencies that are no longer required [Debian]
   when: ansible_os_family == "Debian"
