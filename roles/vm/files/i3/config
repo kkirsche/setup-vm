@@ -1,7 +1,10 @@
 ##################
 # GENERAL CONFIG #
 ##################
+# Mod2 = option / alt for in VM usage
 set $mod Mod2
+# if installing on a desktop, use the windows or command key instead
+# set $mod Mod4
 focus_follows_mouse no
 font pango:Ubuntu 11
 
@@ -17,6 +20,8 @@ bindsym $mod+Shift+A kill
 
 # start rofi
 bindsym $mod+d exec rofi -show drun
+# if rofi is old, like on ubuntu 16.04 we want to use dmenu_run
+# bindsym $mod+d exec dmenu_run
 
 # change focus
 bindsym $mod+j focus left
