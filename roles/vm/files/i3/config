@@ -1,7 +1,7 @@
 ##################
 # GENERAL CONFIG #
 ##################
-set $mod Mod4
+set $mod Mod2
 focus_follows_mouse no
 font pango:Ubuntu 11
 
