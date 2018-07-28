@@ -92,7 +92,7 @@
 - name: install siji fonts
   script: "/opt/siji-fonts/install.sh"
   args:
-    creates: "{{ ansible_env.HOME }}/.fonts/siji.pcf
+    creates: "{{ ansible_env.HOME }}/.fonts/siji.pcf"
 
 - name: download Google material icons
   become: yes
