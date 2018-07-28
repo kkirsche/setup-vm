@@ -148,6 +148,12 @@ bindsym $mod+6 workspace $ws6
 bindsym $mod+7 workspace $ws7
 bindsym $mod+8 workspace $ws8
 
+###############################
+# BIND SOFTWARE TO WORKSPACES #
+###############################
+assign [class="Google-chrome|Firefox|Nightly"] 1
+assign [class="X-terminal-emulator|Gnome-terminal|Terminator|rxvt|URxvt"] 2
+
 #############
 # AUTOSTART #
 #############
