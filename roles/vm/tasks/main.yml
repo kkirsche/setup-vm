@@ -73,15 +73,31 @@
 - name: install Vundle plugins
   command: /usr/bin/vim +PluginInstall +qall
 
-- name: download powerline fonts
+- name: download nerd powerline fonts
   become: yes
   git:
     repo: https://github.com/ryanoasis/nerd-fonts.git
     dest: "/opt/nerd-fonts"
 
-- name: install powerline fonts
+- name: install nerd powerline fonts
   become: yes
   script: "/opt/nerd-fonts/install.sh"
+
+- name: download siji fonts
+  become: yes
+  git:
+    repo: https://github.com/stark/siji.git
+    dest: "/opt/siji-fonts"
+
+- name: install siji fonts
+  become: yes
+  script: "/opt/siji-fonts/install.sh"
+
+- name: download Google material icons
+  become: yes
+  git:
+    repo: http://github.com/google/material-design-icons.git
+    dest: "/opt/material-design-icons-fonts"
 
 - name: create base configuration directory
   file:
