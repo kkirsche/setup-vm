@@ -162,6 +162,11 @@ assign [class="X-terminal-emulator|Gnome-terminal|Terminator|rxvt|URxvt"] 2
 # AUTOSTART #
 #############
 
+# Config
+exec --no-startup-id "xset +fp ~/.fonts"
+exec --no-startup-id "xset +fp /usr/share/fonts/local"
+exec --no-startup-id "xset fp rehash"
+
 # Software
 exec --no-startup-id "compton -f --config ~/.config/compton.conf"
 exec_always --no-startup-id "feh --bg-scale ~/.config/images/wallpaper.jpg"
