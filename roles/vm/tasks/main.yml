@@ -179,6 +179,12 @@
     regexp: "# zstyle ':prezto:module:tmux:auto-start' remote 'yes'"
     line: "zstyle ':prezto:module:tmux:auto-start' remote 'yes'"
 
+- name: set prezto to use colored substring search
+  lineinfile:
+    path: "{{ ansible_env.HOME }}/.zpreztorc"
+    regexp: "# zstyle ':prezto:module:history-substring-search' color ''"
+    line: "zstyle ':prezto:module:history-substring-search' color 'yes'"
+
 - name: set the terminal for 256 color mode
   lineinfile:
     path: "{{ ansible_env.HOME }}/.zshrc"
