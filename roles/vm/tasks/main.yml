@@ -80,8 +80,9 @@
     dest: "/opt/nerd-fonts"
 
 - name: install nerd powerline fonts
-  become: yes
   script: "/opt/nerd-fonts/install.sh"
+  args:
+    creates: "{{ ansible_env.HOME }}/.local/share/fonts/NerdFonts/Hack Regular Nerd Font Complete Mono.ttf"
 
 - name: download siji fonts
   become: yes
