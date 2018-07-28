@@ -1,8 +1,9 @@
 ##################
 # GENERAL CONFIG #
 ##################
-# Mod2 = option / alt for in VM usage
-set $mod Mod2
+# xmodmap to view the modifiers on your machine
+# Mod1 = option / alt for in VM usage
+set $mod Mod1
 # if installing on a desktop, use the windows or command key instead
 # set $mod Mod4
 focus_follows_mouse no
