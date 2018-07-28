@@ -2,7 +2,7 @@
 # tasks file for common
 - name: we're preparing to setup
   debug:
-    var: ansible_os_family
+    msg: "Preparing to setup {{ inventory_hostname }} with OS family {{ ansible_os_family }} and home dir {{ ansible_env.HOME }}"
 
 - import_tasks: kali.yml
 

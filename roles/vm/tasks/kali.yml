@@ -111,5 +111,6 @@
 
 - name: update locate database [Kali Linux]
   when: ansible_os_family == "Kali GNU/Linux"
+  become: yes
   command: /usr/bin/updatedb
  
