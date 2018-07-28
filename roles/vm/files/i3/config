@@ -170,9 +170,10 @@ exec_always --no-startup-id "feh --bg-scale ~/.config/images/wallpaper.jpg"
 for_window [class=".*"] border pixel 1
 for_window [class=".*"] title_format "    %title"
 # for_window [class="polybar"] gaps outer 20
-gaps inner 20
-# smart_gaps on
-smart_borders on
+
+# disable gaps features out of the box to ensure we don't throw warnings / error
+# gaps inner 20
+# smart_borders on
 
 # class                 border  backgr. text    indicator child_border
 client.focused          #ffb52a #ffb52a #ffffff #ffb52a   #ffb52a"""
